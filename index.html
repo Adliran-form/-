@@ -152,7 +152,7 @@ async function submitStep1(){
 
   // ارسال به Google Sheet
   try{
-    const WEBHOOK="https://script.google.com/macros/s/AKfycbx819xxYUL8424H30N1vwPtriBo0m7DBO8u9wfyEPXR2FvElWUd-R_qTgPEq3-JTgzu-Q/exec";
+const WEBHOOK = "/.netlify/functions/submit";
     const res=await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     if(res.ok) googleSaved=true;
   }catch(e){googleSaved=false;}
